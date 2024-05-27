@@ -1,0 +1,1 @@
+$env:COMPANIES_HOUSE_API_KEY="c2a8d4ee-ad2c-4074-acc2-e45b66c0d538"; cargo run
