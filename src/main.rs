@@ -24,7 +24,7 @@ impl Company {
             \ncompany_status: {},
             \ncompany_creation: {},
             \ncompany_type: {},
-            \ncompany_address: {},
+            \ncompany_address: {}
         ",self.title,self.company_number,self.company_status,self.date_of_creation,self.company_type,self.address_snippet)
     }
 }
