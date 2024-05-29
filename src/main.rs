@@ -1,8 +1,10 @@
-use reqwest::Error;
+use anyhow::{Error,Result,Context};
 use serde::Deserialize;
 use std::env;
 use std::io::{self, Write};
 use base64::encode;
+use reqwest::blocking::Client;
+use serde_json::Value;
 
 #[derive(Deserialize, Debug)]
 struct Company {
@@ -14,8 +16,11 @@ struct Company {
     address_snippet: String,
 }
 
-#[tokio::main]
-async fn main() -> Result<(), Error> {
+fn get_request
+
+
+
+fn main() -> Result<()> {
     // Retrieve the API key from environment variables
     let api_key = env::var("COMPANIES_HOUSE_API_KEY").expect("COMPANIES_HOUSE_API_KEY not set");
 
@@ -35,18 +40,25 @@ async fn main() -> Result<(), Error> {
         "https://api.company-information.service.gov.uk/search/companies?q={}",
         company_name
     );
-    let client = reqwest::Client::new();
+    let client = Client::new();
     let res = client
         .get(&url)
         .header("Authorization", format!("Basic {}", encoded_key))
-        .send()
-        .await?
-        .json::<serde_json::Value>()
-        .await?;
+        .send().context("failed to send")?;
+
+    let status: reqwest::StatusCode = res.status();
+
+    if !status.is_success() {
+        let error_message = format!("?Unable to send request due: {status}");
+        return Err(Error::msg(error_message));
+    }
+
+    let body: Value = res.json().context("failed to turn into json")?;
+    
 
 
     // Extract the company details from the response
-    if let Some(items) = res["items"].as_array() {
+    if let Some(items) = body["items"].as_array() {
         if !items.is_empty() {
             // Attempt to parse the first item as a Company
             let company_info: Company = serde_json::from_value(items[0].clone()).unwrap();
