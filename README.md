@@ -44,20 +44,6 @@ company_type: ltd,
 
 company_address: Not Available
 
-----------------------
-
-
-company_title: BLD (A) LIMITED,
-
-company_number: 00467242,
-
-company_status: active,
-
-company_creation: 1949-04-12,
-
-company_type: ltd,
-
-company_address: York House, 45 Seymour Street, London, W1H 7LX
 
 ----------------------
 
