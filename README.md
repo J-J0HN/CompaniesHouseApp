@@ -3,7 +3,7 @@
 ## Quick start
 in your terminal, set your api key
 ```bash
-$env:COMPANIES_HOUSE_API_KEY="<your-key-here>"
+COMPANIES_HOUSE_API_KEY="<your-key-here>"
 ```
 get the key from [here](https://developer.company-information.service.gov.uk/how-to-create-an-application)
 
